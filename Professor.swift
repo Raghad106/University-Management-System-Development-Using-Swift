@@ -1,7 +1,9 @@
-class Professor: Person{
+class Professor: Person, Trackable {
     private var _speciality: String
     private var _salary: Double
     private var _courses: [Course] = []
+    private var _location: String
+
 
     var speciality: String {
         get { _speciality }
@@ -13,10 +15,16 @@ class Professor: Person{
         set { _salary = newValue }
     }
 
+    var location: String {
+        get { _location }
+        set { _location = newValue }
+    }
+
     init(name: String, location: String, speciality: String, salary: Double) {
         self._speciality = speciality
         self._salary = salary
-        super.init(name: name, location: location)
+        self._location = location       
+        super.init(name: name)
     }
 
 

@@ -18,10 +18,10 @@ class Student: Person {
         set { _enrollments = newValue }
     }
 
-    init(name: String, location: String, major: String, gpa: Double) {
+    init(name: String,  major: String, gpa: Double) {
         self._major = major
         self._gpa = gpa
-        super.init(name: name, location: location)
+        super.init(name: name)
     }
 
     func addEnrollToStudentRecord(enrollment: Enrollment) {

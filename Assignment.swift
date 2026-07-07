@@ -1,13 +1,15 @@
 import Foundation
 
-class Assignment: Identifiable, Equatable{
-    private static var counter: Int = 0
-    private(set) var id: Int
+class Assignment: Equatable{
+    private var _id: Int
     private var _title: String
     private var _dueDate: Date
     private var _submissions: [Submission]
 
-    var assignmentId: Int{ get { id }}
+    var id: Int{ 
+        get { _id }
+        set { _id = newValue }
+    }
     var title: String{
         get { _title }
         set { _title = newValue}
@@ -20,19 +22,18 @@ class Assignment: Identifiable, Equatable{
         get { _submissions }
         set { _submissions = newValue}
     }
-    init(title: String, dueDate: Date) {
-        Assignment.counter += 1
-        self.id = Assignment.counter
+    init(id: Int, title: String, dueDate: Date) {
+        self._id = id
         self._title = title
         self._dueDate = dueDate
         self._submissions = []
     }
     static func == (lhs: Assignment, rhs: Assignment) -> Bool {
-        return lhs.id == rhs.id
+        return lhs._id == rhs._id
     }
 
     // To apply Compostion relationship between Assignment and Submission
-    func submitTheAssignment(fileName: String, submittedAt: Date, student: Student) {
+    func submitTheAssignment(id: Int, fileName: String, submittedAt: Date, student: Student) {
         // Check due date
         guard submittedAt <= self._dueDate else {
             print("Submission rejected — due date has passed")
@@ -45,7 +46,7 @@ class Assignment: Identifiable, Equatable{
             return
         }
 
-        let submission = Submission(fileName: fileName, submittedAt: submittedAt, student: student)
+        let submission = Submission(id: id, fileName: fileName, submittedAt: submittedAt, student: student)
         self._submissions.append(submission)
         print("You submitted successfully to \(self._title)")
     }
@@ -61,13 +62,15 @@ class Assignment: Identifiable, Equatable{
 }
 
 class Submission: Identifiable, Equatable{
-    private static var counter: Int = 0
-    private(set) var id: Int
+    private var _id: Int
     private var _fileName: String
     private var _submittedAt: Date
     private var _student: Student
 
-    var submissionId: Int{ get { id }}
+    var id: Int{ 
+        get { _id }
+        set { _id = newValue }    
+    }
     
     var fileName: String {
         get { _fileName }
@@ -82,14 +85,13 @@ class Submission: Identifiable, Equatable{
         set { _student = newValue }
     }
 
-    private init(fileName: String, submittedAt: Date, student: Student) {
-        Submission.counter += 1
-        self.id = Submission.counter
+    init(id: Int, fileName: String, submittedAt: Date, student: Student) {
+        self._id = id
         self._fileName = fileName
         self._submittedAt = submittedAt
         self._student = student
     }
     static func == (lhs: Submission, rhs: Submission) -> Bool {
-    return lhs.id == rhs.id
+    return lhs._id == rhs._id
     }
 }

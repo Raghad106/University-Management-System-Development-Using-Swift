@@ -1,13 +1,15 @@
-class Course: Identifiable, Equatable {
-    private static var counter = 0
-    private(set) var id: Int
+class Course: Equatable {
+    private var _courseId: Int
     private var _title: String
     private var _credits: Int
     private var _professor: Professor
     private var _enrollments: [Enrollment]
     private var _assignments: [Assignment]
 
-    var courseId: Int { id }
+    var courseId: Int { 
+        get { _courseId }
+        set { _courseId = newValue }
+    }
     var title: String {
         get { _title }
         set { _title = newValue }
@@ -26,14 +28,13 @@ class Course: Identifiable, Equatable {
         get { _professor }
         set { _professor = newValue }
     }
-    init(title: String, credits: Int, professor: Professor) {
+    init(courseId: Int, title: String, credits: Int, professor: Professor) {
+        self._courseId = courseId
         self._title = title
         self._credits = credits
         self._professor = professor
         self._enrollments = []
         self._assignments = []
-        Course.counter += 1
-        self.id = Course.counter
     }
 
     // enrollToTheCourse and dropTheCourse are student operations
@@ -90,6 +91,6 @@ class Course: Identifiable, Equatable {
         }
     }
     static func == (lhs: Course, rhs: Course) -> Bool {
-    return lhs.id == rhs.id
+    return lhs._courseId == rhs._courseId
     }
 }

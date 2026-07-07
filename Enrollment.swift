@@ -1,12 +1,12 @@
-class Enrollment: Identifiable, Equatable {
-    private static var counter = 0
-    private(set) var id: Int
+class Enrollment: Equatable {
+    private var _enrollmentId: Int
     private var _student: Student
     private var _semester: String
     private var _grade: String
 
     var enrollmentId: Int {
-        get { id }
+        get { _enrollmentId }
+        set { _enrollmentId = newValue }
     }
     var student: Student {
         get { _student }
@@ -21,15 +21,14 @@ class Enrollment: Identifiable, Equatable {
         set { _grade = newValue }
     }
 
-    init(student: Student, semester: String, grade: String){
+    init(enrollmentId: Int, student: Student, semester: String, grade: String){
+        self._enrollmentId = enrollmentId
         self._student = student
         self._semester = semester
         self._grade = grade
-        Enrollment.counter += 1
-        self.id = Enrollment.counter
     }
     static func == (lhs: Enrollment, rhs: Enrollment) -> Bool {
-        return lhs.id == rhs.id
+        return lhs._enrollmentId == rhs._enrollmentId
     }
     
 }
