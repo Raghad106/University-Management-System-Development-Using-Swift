@@ -96,4 +96,21 @@ class University {
             
         }
     }
+
+    func getProfessorById(id: Int) -> Professor? {
+        return self._professors.first(where: { $0.id == id })
+    }
+    func getStudentById(id: Int) -> Student? {
+        return self._students.first(where: { $0.id == id })
+    }
+    func getCourseById(id: Int) -> Course? {
+        return self._courses.first(where: { $0.courseId == id })
+    }
+
+    func reportUniversityStatus() {
+        print("University Status Report:")
+        print("Total Professors: \(self._professors.count)")
+        print("Total Students: \(self._students.count)")
+        print("Total Courses: \(self._courses.count)")
+    }
 }

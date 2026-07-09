@@ -32,7 +32,12 @@ struct SystemApp {
         p1.assignCourse(course: c1)
         c1.enrollToTheCourse(enrollment: enrollment)
         let assignment1 = Assignment(id: 1, title: "IOS Assignment 1", dueDate: Date().addingTimeInterval(60 * 60 * 24 * 7))
-        assignment1.submitTheAssignment(id: 1, fileName: "IOS_Assignment1.pdf", submittedAt: Date(), student: s1)
         c1.addAssignment(assignment: assignment1)
+        assignment1.submitTheAssignment(id: 1, fileName: "IOS_Assignment1.pdf", submittedAt: Date(), student: s1)
+
+        
+        print("Students: \(University.shared.students.count)")
+        print("Professors: \(University.shared.professors.count)")
+        print("Courses: \(University.shared.courses.count)")
     }
 }
