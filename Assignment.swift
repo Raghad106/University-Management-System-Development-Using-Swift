@@ -32,7 +32,6 @@ class Assignment: Equatable{
         return lhs._id == rhs._id
     }
 
-    // To apply Compostion relationship between Assignment and Submission
     func submitTheAssignment(id: Int, fileName: String, submittedAt: Date, student: Student) {
         // Check due date
         guard submittedAt <= self._dueDate else {
